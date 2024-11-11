@@ -215,7 +215,7 @@ class WordFamily:
             return len(self.words) < len(other.words)
         #compare diffculty, TRUE if self is harder
         if self.difficulty != other.difficulty:
-            return self.difficulty > other.difficulty
+            return self.difficulty < other.difficulty
         #if same length and diffculty, compare by color
         return self.feedback_colors < other.feedback_colors
 
@@ -364,7 +364,7 @@ def fast_sort(lst):
     middle = []
     right  = []
     #middle element as pivot
-    mid = len(lst) // 2
+    mid = lst[len(lst) // 2]
     pivot = lst[mid]
 
     for element in lst:
@@ -377,7 +377,7 @@ def fast_sort(lst):
         else:
             right.append(element)
 
-    return fast_sort(left) + middle + fast_sort(right)
+    return fast_sort(left) + fast_sort(middle) + fast_sort(right)
 
 
 def get_feedback_colors(secret_word, guessed_word):
@@ -456,8 +456,9 @@ def get_feedback(remaining_secret_words, guessed_word):
     #compare fams to find hardest based on size, diffculty, lexicon order
     for feedback_tuple, words2 in word_fams.items():
         fam_size = len(words2)
+        #add up family difficulty
         difficulty = 0
-        for color in feedback_colors:
+        for color in feedback_tuple:
             difficulty += WordFamily.COLOR_DIFFICULTY[color]
 
     #update based on: fam size, difficulty, lexicon order
