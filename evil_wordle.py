@@ -212,10 +212,10 @@ class WordFamily:
             raise NotImplementedError("< operator only valid for WordFamily comparisons.")
          #compare word length, TRUE if self is longer, false otherwise
         if len(self.words) != len(other.words):
-            return len(self.words) < len(other.words)
+            return len(self.words) > len(other.words)
         #compare diffculty, TRUE if self is harder
         if self.difficulty != other.difficulty:
-            return self.difficulty < other.difficulty
+            return self.difficulty > other.difficulty
         #if same length and diffculty, compare by color
         return self.feedback_colors < other.feedback_colors
 
@@ -364,7 +364,7 @@ def fast_sort(lst):
     middle = []
     right  = []
     #middle element as pivot
-    mid = lst[len(lst) // 2]
+    mid = len(lst) // 2
     pivot = lst[mid]
 
     for element in lst:
