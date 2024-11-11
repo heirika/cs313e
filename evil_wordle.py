@@ -377,7 +377,7 @@ def fast_sort(lst):
         else:
             right.append(element)
 
-        return fast_sort(left) + middle + fast_sort(right)
+    return fast_sort(left) + middle + fast_sort(right)
 
 
 def get_feedback_colors(secret_word, guessed_word):
