@@ -384,7 +384,9 @@ def main():
     # you will need to call the method to convert them from their labels to their index
     for _ in range(num_edges):
         prereq, course = sys.stdin.readline().strip().split()
-        graph.add_edge(prereq, course)
+        prereq_index = graph.get_index(prereq)
+        course_index = graph.get_index(course)
+        graph.add_edge(prereq_index, course_index)            
 
     ####################################################################################
     # DO NOT CHANGE ANYTHING BELOW THIS
