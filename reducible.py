@@ -108,28 +108,22 @@ def find_word(s, hash_table):
     pre: s is a string, and hash_table is a list representing the hash table.
     post: Returns True if s is found in hash_table, otherwise returns False.
     """
+
     table_size = len(hash_table)
     index = hash_word(s, table_size)
     step = step_size(s)
-
-    start_index = index
-
-
-    while True:
-        #word found: return True
+    attempts = 0
+    
+    while hash_table[index] != "":
         if hash_table[index] == s:
             return True
-        #if empty, word is not in table
-        if hash_table[index] == "":
-            return False
-
-        #move to new index using double hash
         index = (index + step) % table_size
-
-        #end up back at start index, word was not found
-        if index == start_index:
+        attempts += 1
+        
+        if attempts >= table_size:
             return False
-
+    
+    return False
 
 
 def is_reducible(s, hash_table, hash_memo):
